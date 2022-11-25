@@ -8,7 +8,7 @@ namespace no00ob.WaveLauncher
 {
     static class Program
     {
-        public const string version = "1.0.0";
+        public const string version = "1.0.0-d";
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -17,16 +17,17 @@ namespace no00ob.WaveLauncher
         {
             StringBuilder log = new StringBuilder();
             string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (File.Exists(path + "/launcher.log"))
+            if (File.Exists(path + "/devlauncher.log"))
             {
-                File.Delete(path + "/launcher.log");
+                File.Delete(path + "/devlauncher.log");
             }
-            log.Append("Reading game path...");
-            string game = Path.Combine(path, "Wave.exe");
+            log.Append("Reading project path...");
+            string game = Path.Combine(path, "WaveDev.lnk");
             string gameVersion = File.ReadAllText(path + "/Wave_Data/version");
             INIWorker.SetPath(path);
+            /*
             log.Append("\nReading launcher settings file...");
-
+            
             string[] settings = new string[11];
             settings[0] = INIWorker.IniReadValue(INIWorker.Sections.Rendering, INIWorker.Keys.sApi);
             settings[1] = INIWorker.IniReadValue(INIWorker.Sections.Rendering, INIWorker.Keys.sQualityPreset);
@@ -39,7 +40,7 @@ namespace no00ob.WaveLauncher
             settings[8] = INIWorker.IniReadValue(INIWorker.Sections.Rendering, INIWorker.Keys.iNoGraphics);
             settings[9] = INIWorker.IniReadValue(INIWorker.Sections.Game, INIWorker.Keys.iCensoredMode);
             settings[10] = INIWorker.IniReadValue(INIWorker.Sections.Game, INIWorker.Keys.iNoLog);
-
+            
             int i_width = StringToInt(settings[2], false);
             int i_height = StringToInt(settings[3], false);
             int i_fullscreen = StringToInt(settings[4], true);
@@ -49,7 +50,7 @@ namespace no00ob.WaveLauncher
             int i_noDisplay = StringToInt(settings[8], true);
             int i_censorship = StringToInt(settings[9], true);
             int i_noLog = StringToInt(settings[10], true);
-
+            
             if (INIWorker.INIExists())
             {
                 bool isEmptyFile = true;
@@ -136,15 +137,15 @@ namespace no00ob.WaveLauncher
                 log.Append("\nLauncher settings file does not exist!");
             }
             string launchArguments = "";
-
-            log.Append("\nStarting game...");
+            */
+            log.Append("\nStarting project...");
 
             // Maybe allow any additional args but as of right now I have no idea how to elegantly tell which ones are duplicates of built in unity arg handling
             //for (int i = 0; i < args.Length; i++)
             //{
             //    launchArguments = launchArguments + " " + args[i];
             //}
-
+            /*
             switch (settings[0])
             {
                 case "dx11":
@@ -224,26 +225,26 @@ namespace no00ob.WaveLauncher
             {
                 launchArguments += " -censor-on";
             }
-
-            log.Append("\npath=" + game + "\nargs=" + launchArguments + "\ngameVersion=" + gameVersion + "\nlauncherVersion=" + version);
+            */
+            log.Append("\npath=" + game + "\nargs=" /* + launchArguments */ + "\ngameVersion=" + gameVersion + "\nlauncherVersion=" + version);
 
             try
             {
-                System.Diagnostics.Process.Start(game, launchArguments);
-                log.Append("\nGame started!");
+                System.Diagnostics.Process.Start(string.Format(@"{0}",game)/*, launchArguments*/);
+                log.Append("\nProject started!");
             }
             catch (Exception ex)
             {
-                log.Append("\nGame failed to start!");
+                log.Append("\nProject failed to start!");
                 log.Append("\n"+"Exception occured="+ex.ToString());
                 if (ex.Message.Contains("The system cannot find the file specified"))
-                    MessageBox.Show("Game executable file 'Wave.exe' not found. Make sure the game is installed correctly.", "Error has occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Project shortcut file 'WaveDev.lnk' not found. Make sure the developer environment is setup correctly.", "Error has occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     MessageBox.Show(ex.Message + "\n\n" + ex.ToString(), "Error has occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             log.Append("\nShutting down the launcher...");
-            File.AppendAllText(path + "/launcher.log", log.ToString());
+            File.AppendAllText(path + "/devlauncher.log", log.ToString());
             log.Clear();
             System.Environment.Exit(1);
         }

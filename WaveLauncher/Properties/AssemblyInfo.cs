@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Wave Launcher")]
-[assembly: AssemblyDescription("Launcher for Wave: Nazi Zombies")]
+[assembly: AssemblyTitle("Wave Dev Launcher")]
+[assembly: AssemblyDescription("Developer Launcher for Wave: Nazi Zombies")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("no00ob")]
-[assembly: AssemblyProduct("Wave Launcher")]
+[assembly: AssemblyProduct("Wave Dev Launcher")]
 [assembly: AssemblyCopyright("Copyright © no00ob 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

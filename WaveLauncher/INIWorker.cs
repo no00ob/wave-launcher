@@ -10,13 +10,13 @@ namespace no00ob.WaveLauncher
 {
     public class INIWorker
     {
-        private static string path = "launcher.ini";
+        private static string path = "devlauncher.ini";
         private static Dictionary<string, Dictionary<string, string>> IniDictionary = new Dictionary<string, Dictionary<string, string>>();
         private static bool Initialized = false;
 
         public static void SetPath(string p)
         {
-            path = p + "/launcher.ini";
+            path = p + "/devlauncher.ini";
         }
 
         /// <summary>
